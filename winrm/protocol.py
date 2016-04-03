@@ -190,7 +190,7 @@ class Protocol(object):
     def send_message(self, message):
         # TODO add message_id vs relates_to checking
         # TODO port error handling code
-        return self.transport.send_message(message)
+        return self.transport.send_message(message.encode("utf-8"))
 
     def close_shell(self, shell_id):
         """
