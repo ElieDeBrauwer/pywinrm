@@ -1,6 +1,7 @@
 import sys
 
 from winrm.exceptions import WinRMTransportError, UnauthorizedError
+from base64 import b64encode
 
 
 HAVE_KERBEROS = False
@@ -38,8 +39,8 @@ class ForcedBasicAuthHandler(HTTPBasicAuthHandler):
         url = req.get_full_url()
         user, password = self.passwd.find_user_password(None, url)
         if password:
-            base64_user_pass = ('%s:%s' % (user, password)).encode('base64').strip()
-            auth_header_value = 'Basic %s' % base64_user_pass
+            auth = "%s:%s" % (user, password)
+            auth_header_value = 'Basic %s' % b64encode(str.encode(auth)).decode("ascii")
             req.add_unredirected_header(self.auth_header, auth_header_value)
         return req
 
