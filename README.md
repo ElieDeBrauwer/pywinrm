@@ -103,6 +103,9 @@ p.close_shell(shell_id)
 ### Enable WinRM on remote host
 
 - Enable basic WinRM authentication (Good only for troubleshooting. For hosts in a domain it is better to use Kerberos authentication.)
+```
+winrm quickconfig 
+```
 - Allow unencrypted message passing over WinRM (not secure for hosts in a domain but this feature was not yet implemented.)
 
 ```
